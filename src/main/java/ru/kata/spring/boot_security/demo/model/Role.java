@@ -23,23 +23,11 @@ public class Role implements GrantedAuthority {
 
     }
 
+
     @Override
     public String getAuthority() {
         return getName();
     }
+
 }
 
-
-/*<td><ul>
-<li>
-<input id="features1" name="features" type="checkbox" value="SEEDSTARTER_SPECIFIC_SUBSTRATE" />
-<input name="_features" type="hidden" value="on" />
-<label for="features1">Admin</label>
-</li></ul></td>
-<td><ul>
-<li>
-<input id="features2" name="features" type="checkbox" value="FERTILIZER" />
-<input name="_features" type="hidden" value="on" />
-<label for="features2">User</label>
-</li>
-</ul></td> */

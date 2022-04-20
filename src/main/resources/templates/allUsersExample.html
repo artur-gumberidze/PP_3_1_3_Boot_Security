@@ -18,93 +18,112 @@
 <body>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4 col-lg-3 navbar-container bg-light">
-            <!-- Вертикальное меню -->
-            <nav class="navbar navbar fixed-top navbar-expand-md navbar-light">
-                <div class="navbar-brand" style="height: 100%; position: absolute">Navbar
-                    <div class="collapse navbar-collapse" id="navbar">
-                        <!-- Пункты вертикального меню -->
-                        <ul class="nav flex-column">
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="/admin" id="admbtn" style="background-color: aqua">Admin</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" id="btn">User</a>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-
-
-        <button class="btn btn-success nBtn">New</button>
-        <div style="background-color: #fff;">
-                <div id="firsDiv">
-
-                    <table class="table table-hover" id="tab">
-                        <thead>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="color: white; width: 400px">
                         <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="user : ${users}">
-                            <td th:text="${user.id}"></td>
-                            <td th:text="${user.username}"></td>
-                            <td th:text="${user.lastname}"></td>
-                            <td th:text="${user.email}"></td>
-                            <td th:each="role : ${user.getRoles()}">
-                                <a th:text="${role.name}"></a>
-                            </td>
-                            <td>
-                                <a class="btn btn-danger delBtn" th:href="@{delete/(id=${user.id})}">Delete</a>
-                                <a class="btn btn-primary eBtn" th:href="@{findOne/(id=${user.id})}">Edit</a>
+                            <td th:text="${onlyUser.getEmail()}"></td>
+                            <td th:each="role : ${onlyUser.getRoles()}">
+                                <a th:text="'with roles: ' + ${role.name}"></a>
                             </td>
                         </tr>
-                        </tbody>
-                    </table>
-                    <hr/>
-                    <ul class="nav nav-pills">
-                        <li class="nav-item"
-                            th:each="i : ${#numbers.sequence(0,data.totalPages)}"><a
-                                th:href="@{/admin(page=${i})}" th:text="${i}"
-                                class="nav-link" th:classappend="${currentPage}==${i} ?'active':'' "></a></li>
-                    </ul>
-                </div>
+
+                    </li>
+                </ul>
+                <a style="margin-left: 650px" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-3">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link" href="/admin" id="admbtn" style="background-color: aqua">Admin</a>
+                <a class="nav-link" id="btn" data-toggle="pill" role="tab" aria-controls="v-pills-profile"
+                   aria-selected="false">User</a>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                <div style="background-color: #fff;">
+                    <div>
+                        <h1>Admin Panel</h1>
+                        <div id="firsDiv">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="btn btn-link nBtn">New</a>
+                                </li>
+                            </ul>
+                            <table class="table table-hover" id="tab">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Age</th>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="user : ${users}">
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${user.lastname}"></td>
+                                    <td th:text="${user.email}"></td>
+                                    <td th:text="${user.age}"></td>
+                                    <td th:each="role : ${user.getRoles()}">
+                                        <a th:text="${role.name}"></a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-danger delBtn" th:href="@{delete/(id=${user.id})}">Delete</a>
+                                        <a class="btn btn-primary eBtn" th:href="@{findOne/(id=${user.id})}">Edit</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <hr/>
+                        </div>
 
 
-                <div class="offDiv" id="offDiv" style="display: none">
-                    <div style="background-color: #fff">
-                        <table class="table table-hover" id="tabs">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td th:text="${onlyUser.id}"></td>
-                                <td th:text="${onlyUser.username}"></td>
-                                <td th:text="${onlyUser.lastname}"></td>
-                                <td th:text="${onlyUser.email}"></td>
-                                <td th:text="${onlyUser.roles}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="offDiv" id="offDiv" style="display: none">
+                            <div style="background-color: #fff">
+                                <table class="table table-hover" id="tabs">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Age</th>
+                                        <th>Role</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td th:text="${onlyUser.id}"></td>
+                                        <td th:text="${onlyUser.username}"></td>
+                                        <td th:text="${onlyUser.lastname}"></td>
+                                        <td th:text="${onlyUser.email}"></td>
+                                        <td th:text="${onlyUser.age}"></td>
+                                        <td th:each="role : ${onlyUser.getRoles()}">
+                                            <a th:text="${role.name}"></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
+                <!-- <button class="btn btn-success nBtn">New</button> -->
 
 
                 <div class="myForm">
@@ -142,13 +161,18 @@
                                             <input class="form-control" id="email" name="email" type="text" value=""/>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-form-label" for="age">Age:</label>
+                                            <input class="form-control" id="age" type="number" name="age" value="" min="0" max="110" step="1">
+
+                                        </div>
+                                        <div class="form-group">
                                             <label class="col-form-label" for="password">Password:</label>
                                             <input class="form-control" id="password" name="password" type="text"
                                                    value=""/>
                                         </div>
                                         <div class="row">
                                             <select class="js-select2" multiple="multiple" name="roles1">
-                                                <option value="ADMIN" data-badge="">ADMIN</option>
+                                                <option value="ADMIN" data-badge="" selected>ADMIN</option>
                                                 <option value="USER" data-badge="">USER</option>
                                             </select>
 
@@ -191,6 +215,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>

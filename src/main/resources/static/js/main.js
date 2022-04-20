@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
     $('.nBtn, .table .eBtn').on('click', function (event) {
@@ -12,6 +13,7 @@ $(document).ready(function () {
                 $('.myForm #lastname').val(user.lastname);
                 $('.myForm #email').val(user.email);
                 $('.myForm #password').val(user.password);
+                $('.myForm #age').val(user.age);
             });
             $('.myForm #exampleModal').modal();
         } else {
@@ -19,9 +21,23 @@ $(document).ready(function () {
             $('.myForm #username').val('');
             $('.myForm #lastname').val('');
             $('.myForm #email').val('');
-            $('.myForm #password');
+            $('.myForm #password').val('');
+            $('.myForm #age').val('');
             $('.myForm #exampleModal').modal();
         }
+    });
+
+    $('#btn').click(function() {
+        $(this).css("background-color", "aqua")
+        $("#admbtn").css("background-color", "white")
+        $("#firsDiv").css("display", "none");
+        $("#offDiv").css("display", "block");
+    });
+
+    $('#admbtn').click(function() {
+        $(this).css("background-color", "aqua")
+        $("#btn").css("background-color", "white")
+
     });
 
     $('.table .delBtn').on('click', function (event) {
@@ -31,3 +47,4 @@ $(document).ready(function () {
         $('#myModal').modal();
     });
 });
+

@@ -20,6 +20,7 @@ public class User {
 
     private String email;
 
+    private Integer age;
 
     @ManyToMany
     @JoinTable(name = "users_roles",
