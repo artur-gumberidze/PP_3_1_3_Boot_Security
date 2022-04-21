@@ -73,13 +73,17 @@ public class AdminController {
 
     @PostMapping("/save")
     public String save (User u, @RequestParam String[] roles1){
-        //Role role = new Role(2L,"ROLE_USER");
-        //Set<Role> s = new HashSet<Role>();
         List <Role> l = roleByName(roles1);
-
         u.setPassword(passwordEncoder().encode(u.getPassword()));
-        //s.add(role);
+        u.setRoles(l);
+        userService.saveUser(u);
+        return "redirect:/admin";
+    }
 
+    @PostMapping("/edit")
+    public String edit (User u, @RequestParam String[] roles1){
+        List <Role> l = roleByName(roles1);
+        u.setPassword(passwordEncoder().encode(u.getPassword()));
         u.setRoles(l);
         userService.saveUser(u);
         return "redirect:/admin";

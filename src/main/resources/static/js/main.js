@@ -16,16 +16,17 @@ $(document).ready(function () {
                 $('.myForm #age').val(user.age);
             });
             $('.myForm #exampleModal').modal();
-        } else {
-            $('.myForm #id').val('');
-            $('.myForm #username').val('');
-            $('.myForm #lastname').val('');
-            $('.myForm #email').val('');
-            $('.myForm #password').val('');
-            $('.myForm #age').val('');
-            $('.myForm #exampleModal').modal();
+        } else if (text==='New') {
+            $("#exampleModals").css("display", "block")
+            $("#firsDiv").css("display", "none");
         }
+
     });
+
+    $('#tBtn').click(function () {
+        $("#exampleModals").css("display", "none")
+        $("#firsDiv").css("display", "block");
+    })
 
     $('#btn').click(function() {
         $(this).css("background-color", "aqua")
